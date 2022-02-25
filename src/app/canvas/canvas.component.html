@@ -1,0 +1,106 @@
+<input type="file" id="arq" (change)="selecionouArquivo($event)">
+        <button pButton type="button" label="Resetar" pTooltip="Reseta o tabuleiro em azul zerado" tooltipPosition="right" class="ui-button-rounded ui-button-success" (click)="clicouResetar()"  ></button>
+        <button pButton type="button" label="Tamanho" pTooltip="Define tamanho dos Nodos" tooltipPosition="right" class="ui-button-rounded ui-button-success" (click)="clicouTamanho()"  ></button> 
+        
+        <button pButton type="button" label="ResetarRandom" pTooltip="Reseta o tabuleiro em amarelo com numeros randomizados" tooltipPosition="right" class="ui-button-rounded ui-button-success" (click)="resetarRandom()"></button> 
+        <p-inputSwitch  [(ngModel)]="risco" pTooltip="Se marcado altera os Nodos apenas passando o mouse em cima" tooltipPosition="right"></p-inputSwitch> Riscar  
+<button pButton type="button" label="Pintar" class="ui-button-rounded ui-button-success" pTooltip="Pinta os Nodos de Amarelo e Zera os pontos de cada nodo" tooltipPosition="bottom" (click)="pintar()"></button> 
+<button pButton type="button" label="Ordenar Bolha" pTooltip="Ordena os Nodos pelo algoritmo de bolha" tooltipPosition="bottom" class="ui-button-rounded ui-button-success" (click)="ordenar()"></button> 
+<p-inputSwitch  [(ngModel)]="cruz" pTooltip="Marca os Nodos em forma de aglomerado (varios por clique ou arrasto)" tooltipPosition="right"></p-inputSwitch> Aglomerado  
+<button pButton type="button" label="Espiralar" pTooltip="Pinta de Amarelo de forma espiralar a partir do centro" tooltipPosition="bottom" class="ui-button-rounded ui-button-success" (click)="espiral1()"></button> 
+<button pButton type="button" label="Numeros Espiralar" pTooltip="Randomiza os Numeros de forma Espiralar" tooltipPosition="bottom" class="ui-button-rounded ui-button-success" (click)="espiral2()"></button> 
+<button pButton type="button" label="Inserir Minas" pTooltip="Insere minas aleatoriamente no tabuleiro" tooltipPosition="bottom" class="ui-button-rounded ui-button-success" (click)="inserirMinas()"></button> 
+<p-inputSwitch  [(ngModel)]="esconderDicas" pTooltip="Se marcado esconde os balões dos Nodos" tooltipPosition="right"></p-inputSwitch> Esconder Balões
+<p-inputSwitch  [(ngModel)]="trocaHabilitada" pTooltip="Se marcado esconde os balões dos Nodos" tooltipPosition="right"></p-inputSwitch> Troca
+
+<p-card *ngIf="nodoSelecionado" [style]="{width: '200px'}" id="caixaDetalhe">
+        <div> <img src='assets/dunga.png' width='20px' heigth='20px' >  {{nodoSelecionado.objeto.nome}}  </div> <div><img src='assets/coracao.png' width='20px' heigth='20px' >  {{nodoSelecionado.objeto.hit}} </div>  
+</p-card>
+
+
+
+
+
+<hr>
+
+<div *ngIf="mostrarSliders" style="text-align: center;width: 110px">
+
+        Horizontais: {{horProvisorio}} <br> <p-slider [(ngModel)]="horProvisorio" [min]="5" [max]="100" [step]="1" [style]="{'width':'14em'}"></p-slider>  
+</div>
+
+<div *ngIf="mostrarSliders" style="text-align: center;width: 110px">
+
+        Verticais: {{verProvisorio}} <br> <p-slider [(ngModel)]="verProvisorio" [min]="5" [max]="60" [step]="1" [style]="{'width':'14em'}"></p-slider>  
+</div>
+
+<div *ngIf="mostrarTamanho">
+                <p-card [style]="{width: '250px'}">
+                        <span style="font-family: acme"> Tamanho dos Nodos: {{tamanho}} </span> 
+                        <p-slider [(ngModel)]="tamanho" [min]="20" [max]="70" [step]="1" [style]="{'width':'14em'}"></p-slider>
+                </p-card>
+
+                <p-card [style]="{width: '250px',display: 'inline-block'}">
+                                <span style="font-family: acme"> Velocidade do Processamento: {{velocidadeBolha}} </span> 
+                                <p-slider [(ngModel)]="velocidadeBolha" [min]="1" [max]="2000" [step]="1" [style]="{'width':'14em'}"></p-slider>
+                </p-card>
+        
+</div>
+<div *ngIf="!mostrarSliders && !mostrarTamanho">
+
+
+<span style="font-family: acme">Trocas Bolha: {{contadorBolha}}</span>
+<span style="margin-left: 20px"></span>
+<button pButton type="button" label="9" pTooltip="Pinta os 9 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(9)"></button>
+<button pButton type="button" label="8" pTooltip="Pinta os 8 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(8)"></button>
+<button pButton type="button" label="7" pTooltip="Pinta os 7 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(7)"></button>
+<button pButton type="button" label="6" pTooltip="Pinta os 6 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(6)"></button>
+<button pButton type="button" label="5" pTooltip="Pinta os 5 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(5)"></button>
+<button pButton type="button" label="4" pTooltip="Pinta os 4 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(4)"></button>
+<button pButton type="button" label="3" pTooltip="Pinta os 3 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(3)"></button>
+<button pButton type="button" label="2" pTooltip="Pinta os 2 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(2)"></button>
+<button pButton type="button" label="1" pTooltip="Pinta os 1 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(1)"></button>
+<button pButton type="button" label="0" pTooltip="Pinta os 0 de azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(0)"></button>
+<button pButton type="button" label="Todos" pTooltip="Pinta os TODOS azuis" tooltipPosition="right" class="ui-button-rounded ui-button-info" (click)="lambrecar(10)"></button>
+   
+<br>
+<span style="font-family: acme">Interações: {{interacoes}}</span>
+
+<span style="margin-left: 20px"></span>
+<button pButton type="button" label="9" pTooltip="Pinta os 9 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(9)"></button>
+<button pButton type="button" label="8" pTooltip="Pinta os 8 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(8)"></button>
+<button pButton type="button" label="7" pTooltip="Pinta os 7 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(7)"></button>
+<button pButton type="button" label="6" pTooltip="Pinta os 6 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(6)"></button>
+<button pButton type="button" label="5" pTooltip="Pinta os 5 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(5)"></button>
+<button pButton type="button" label="4" pTooltip="Pinta os 4 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(4)"></button>
+<button pButton type="button" label="3" pTooltip="Pinta os 3 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(3)"></button>
+<button pButton type="button" label="2" pTooltip="Pinta os 2 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(2)"></button>
+<button pButton type="button" label="1" pTooltip="Pinta os 1 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(1)"></button>
+<button pButton type="button" label="0" pTooltip="Pinta os 0 de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(0)"></button>
+<button pButton type="button" label="Todos" pTooltip="Pinta Todos de amarelos" tooltipPosition="right" class="ui-button-rounded ui-button-warning" (click)="lambrecar2(10)"></button>
+
+<br>
+<span style="font-family: acme;color:red"> Status: {{status}} </span>
+<span style="margin-left: 20px"></span>
+<button pButton type="button" label="9" pTooltip="Pinta os 9 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(9)"></button>
+<button pButton type="button" label="8" pTooltip="Pinta os 8 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(8)"></button>
+<button pButton type="button" label="7" pTooltip="Pinta os 7 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(7)"></button>
+<button pButton type="button" label="6" pTooltip="Pinta os 6 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(6)"></button>
+<button pButton type="button" label="5" pTooltip="Pinta os 5 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(5)"></button>
+<button pButton type="button" label="4" pTooltip="Pinta os 4 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(4)"></button>
+<button pButton type="button" label="3" pTooltip="Pinta os 3 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(3)"></button>
+<button pButton type="button" label="2" pTooltip="Pinta os 2 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(2)"></button>
+<button pButton type="button" label="1" pTooltip="Pinta os 1 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(1)"></button>
+<button pButton type="button" label="0" pTooltip="Pinta os 0 de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(0)"></button>
+<button pButton type="button" label="Todos" pTooltip="Pinta TODOS de vermelhos" tooltipPosition="right" class="ui-button-rounded ui-button-danger" (click)="lambrecar3(10)"></button>
+</div>
+<hr>
+
+<div style="text-align: center;width:100%;height: 100%">
+        <div *ngFor="let ca of camadas">
+                <span *ngFor="let bl of ca" id="{{bl.id}}" [class]='estilo' (click)="clicou($event)" (mouseover)="rolou($event)" (contextmenu)="clicouDireito($event)" pTooltip="<div> <img src='assets/dunga.png' width='20px' heigth='20px' >  {{bl.nome}}  </div> <div><img src='assets/coracao.png' width='20px' heigth='20px' >  {{bl.hit}} </div> " [escape]="false" tooltipPosition="bottom" [tooltipDisabled]="esconderDicas">{{bl.bandeira?' ':bl.hit}}
+                        <img id="{{bl.id}}" *ngIf="bl.bandeira" src="assets/bandeira.png" width="15px" height="15px" >
+                        <img id="{{bl.id}}" *ngIf="bl.mina" src="assets/skull.png" width="15px" height="15px" >
+                </span> 
+            </div>
+</div>
+

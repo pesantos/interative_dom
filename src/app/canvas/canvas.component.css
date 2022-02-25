@@ -1,0 +1,188 @@
+
+
+#bloco{
+    color:blue;
+    background: blue;
+}
+
+@font-face {
+    font-family: 'acme';
+    src: url(./../../assets/Acme-Regular.ttf) format("truetype");
+    font-weight:300;
+  }
+
+
+
+
+@keyframes mudanca{
+    from {
+        background: blue;
+        color: white;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+    }
+    to{
+        background: yellow;
+        color:black;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+    }
+}
+
+@keyframes mudanca2{
+    from {
+        background: yellow;
+        color:black;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+
+        
+    }
+    to{
+        background: blue;
+        color:white;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+    }
+}
+
+
+
+@keyframes troca{
+    from{
+        /* offsetHeight: var(--oheight); */
+        left: var(--oleft);
+        top: var(--otop);
+        position: fixed;
+
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+        
+        /* offsetWidth: var(--owidth); */
+    }
+
+    to{
+        
+        /* offsetHeight: var(--dheight); */
+        left: var(--dleft);
+        top: var(--dtop);
+        position: fixed;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+        
+        /* offsetWidth: var(--dwidth); */
+
+    }
+}
+
+@keyframes mudanca3{
+    from {
+        background:white;
+        color:black;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+
+        
+    }
+    to{
+        background: red;
+        color:white;
+        width: var(--tamanho-nodo);
+        height: var(--tamanho-nodo);
+        border-radius: 100%;
+        text-align: center;
+        display: inline-block;
+        font-family: 'acme';
+    }
+}
+
+.mudarOriginal{
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;
+   -webkit-animation-name: troca; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  animation-name: troca;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  display: inline-block;
+}
+
+.amarelo{
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;
+   -webkit-animation-name: mudanca; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  animation-name: mudanca;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  display: inline-block;
+
+}
+
+.vermelho{
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;
+   -webkit-animation-name: mudanca3; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+  animation-name: mudanca3;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  display: inline-block;
+
+}
+
+.azul{
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;
+   -webkit-animation-name: mudanca2; /* Safari 4.0 - 8.0 */
+   -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+   animation-name: mudanca2;
+   animation-duration: 1s;
+   animation-fill-mode: forwards;
+   display: inline-block;
+ 
+ }
